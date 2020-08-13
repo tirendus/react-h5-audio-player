@@ -83,6 +83,7 @@ interface PlayerProps {
   defaultCurrentTime?: ReactNode
   defaultDuration?: ReactNode
   volume?: number
+  showControls?: boolean
   showJumpControls?: boolean
   showSkipControls?: boolean
   showDownloadProgress?: boolean
@@ -131,6 +132,7 @@ class H5AudioPlayer extends Component<PlayerProps> {
     volume: 1,
     className: '',
     showJumpControls: true,
+    showControls: true,
     showSkipControls: false,
     showDownloadProgress: true,
     showFilledProgress: true,
@@ -563,6 +565,7 @@ class H5AudioPlayer extends Component<PlayerProps> {
       customControlsSection,
       children,
       style,
+      showControls,
     } = this.props
     const loop = this.audio.current ? this.audio.current.loop : loopProp
 
@@ -596,7 +599,7 @@ class H5AudioPlayer extends Component<PlayerProps> {
         {header && <div className="rhap_header">{header}</div>}
         <div className={`rhap_main ${getMainLayoutClassName(layout)}`}>
           <div className="rhap_progress-section">{this.renderUIModules(customProgressBarSection)}</div>
-          <div className="rhap_controls-section">{this.renderUIModules(customControlsSection)}</div>
+          {showControls && <div className="rhap_controls-section">{this.renderUIModules(customControlsSection)}</div>}
         </div>
         {footer && <div className="rhap_footer">{footer}</div>}
       </div>
